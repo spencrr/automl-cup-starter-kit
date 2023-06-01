@@ -1,9 +1,24 @@
 # AutoML Cup Starter Kit
 
-You can refer to the source code at
+Welcome to the AutoML Cup Competition!
 
--   Ingestion Program: `ingestion/ingestion.py`
--   Scoring Program: `scoring/score.py`
+To get started:
+
+1. Create an account on [Codabench](https://www.codabench.org/)
+1. Register with the AutoML Cup Competition
+1. Edit `submission/model.py`
+1. Upload to Codabench under the `My Submissions` tab.
+
+## Submission
+
+The entrypoint `model.py` and `requirements.txt` can be added to a zip as follows:
+
+```sh
+cd submission/
+zip ../submission.zip *
+```
+
+## Testing
 
 To run the training and scoring programs locally (e.g., for the `splice` dataset):
 
@@ -30,15 +45,21 @@ python score.py \
    --output_dir=../output/score/
 ```
 
-## Submission
+There is also a Docker image provided that the true competition utilizes located in `docker/Dockerfile`. To have an equivalent environment, you may use this for your testing.
 
-The entrypoint `model.py` and `requirements.txt` can be added to a zip as follows:
+## Datasets
 
-```sh
-cd submission/
-zip ../submission.zip *
-```
+### Splice
 
-## ListOps
+Splice is provided via HuggingFace and should automatically download!
+
+### ListOps
 
 Put `basic_train.tsv` and `basic_val.tsv` in `data/input_data/listops/listops/` before trying to run the ingestion program.
+
+## Reference
+
+You can refer to the source code at
+
+-   Ingestion Program: `ingestion/ingestion.py`
+-   Scoring Program: `scoring/score.py`
