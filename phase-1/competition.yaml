@@ -51,7 +51,7 @@ leaderboards:
   - index: 0
     title: Results
     key: Results
-    submission_rule: "Force_Last"
+    submission_rule: "Add_And_Delete"
     columns:
       - title: Accuracy
         key: accuracy
