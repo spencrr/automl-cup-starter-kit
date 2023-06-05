@@ -114,6 +114,14 @@ def _parse_args():
         default=default_pred_time_budget,
         help="Time budget for predicting model " "if not specified in meta.json.",
     )
+    parser.add_argument(
+        "--no-predict",
+        dest="predict",
+        default=True,
+        action="store_false",
+        help="Don't run test predictions.",
+    )
+
     args = parser.parse_args()
     LOGGER.debug("Parsed args are: %s", args)
     LOGGER.debug("-" * 50)
@@ -229,6 +237,10 @@ def main():
 
     LOGGER.info("===== Begin training user model")
     train_result = _train(args, umodel, dataset)
+
+    if not args.predict:
+        LOGGER.info("===== Skipping prediction")
+        return
 
     LOGGER.info("===== Begin preding by user model on test set")
     pred_result = _predict(args)

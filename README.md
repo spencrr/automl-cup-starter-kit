@@ -32,7 +32,8 @@ python3 ingestion.py \
    --ingestion_program_dir=../ingestion_program_dir/ \
    --code_dir=../submission/ \
    --score_dir=../output/ \
-   --temp_dir=../output/
+   --temp_dir=../output/ \
+   --no-predict
 ```
 
 ```sh
