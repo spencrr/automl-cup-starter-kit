@@ -12,14 +12,14 @@ class Model:
         """<ADD DOCUMENTATION HERE>"""
         self.classifier = DecisionTreeClassifier()
 
-    def train(self, train_dataset: Dataset, val_dataset: Dataset):
+    def train(self, train_dataset: Dataset):
         """Train the model.
 
         Args:
             X: Training data matrix of shape (num-samples, num-features), type np.ndarray.
             y: Training label vector of shape (num-samples), type np.ndarray.
         """
-        print(f"FROM MODEL.PY: TRAIN {train_dataset}, VAL {val_dataset}")
+        print(f"FROM MODEL.PY: TRAIN {train_dataset}")
         # print(f"X has shape {X.shape} and is:\n{X}")
         # print(f"y has shape {y.shape} and is:\n{y}")
         # self.classifier.fit(X, y)

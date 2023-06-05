@@ -11,7 +11,7 @@ from pathlib import Path
 import torch
 import torchtext
 from dataloader import AutoMLCupDataloader
-from datasets import DatasetDict, load_dataset
+from datasets import DatasetDict, load_dataset, concatenate_datasets
 
 
 class SequenceDataset:
@@ -368,8 +368,10 @@ class ListOpsDataloader(AutoMLCupDataloader):
         )
 
     def get_split(self, split):
-        if split in ["train", "val", "test"]:
-            return self.dataset[split]
+        if split == "test":
+            return self.dataset["test"]
+        if split == "train":
+            return concatenate_datasets([self.dataset["train"], self.dataset["val"]])
 
 
 # LRA tokenizer renames ']' to 'X' and delete parentheses as their tokenizer removes

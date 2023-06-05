@@ -150,7 +150,7 @@ def _train(args, umodel, dataset: AutoMLCupDataset):
     timer = Timer()
     timer.set(args.time_budget)
     with timer.time_limit("training"):
-        umodel.train(dataset.get_split("train"), dataset.get_split("val"))
+        umodel.train(dataset.get_split("train"))
     duration = timer.duration
     LOGGER.info(f"Finished training the model. time spent {duration:5.2} sec")
 
