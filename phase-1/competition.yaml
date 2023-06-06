@@ -40,8 +40,8 @@ phases:
   - index: 0
     name: Phase 1
     description: "Diverse 1D tasks"
-    start: 5-1-2023
-    end: 7-31-2023
+    start: 6-6-2023
+    end: 7-10-2023
     tasks:
       - 0
       - 1
