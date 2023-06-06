@@ -50,13 +50,15 @@ There is also a Docker image provided that the true competition utilizes located
 
 ## Datasets
 
-### Splice
+Phase 1 comprises two 1D single-class classifcation problems, with the intention of developing methods that might only work (initially) for this problem type.
+For both tasks, the data are formatted as a [datasets.Dataset](https://huggingface.co/docs/datasets/main/en/package_reference/main_classes#datasets.Dataset) with the following fields:
 
-Splice is provided via HuggingFace and should automatically download!
+-   `'input'` is a 1-dimensional numerical vector (either of constant or variable length)
+-   `'label'` is the scalar output
 
-### ListOps
+### Setup
 
-Put `basic_train.tsv` and `basic_val.tsv` in `data/input_data/listops/listops/` before trying to run the ingestion program.
+Download [this](https://drive.google.com/file/d/1bgsd-nL8lKxGq9iw4vdZJ5hN_8XjMYOi/view?usp=sharing) and put `basic_train.tsv` and `basic_val.tsv` in `data/input_data/listops/listops/` before trying to run the ingestion program.
 
 ## Reference
 
