@@ -20,7 +20,7 @@ def _write_predict(output_dir, prediction: Series):
     prediction.to_csv(join(output_dir, "prediction"), index=False, header=True)
 
 
-def predict(args):
+def predict(args, umodel):
     """prediction"""
     result = {}
     try:
@@ -28,10 +28,6 @@ def predict(args):
         path.append(args.model_dir)
         LOGGER.info("==== Load user model")
 
-        # pylint: disable-next=import-error,import-outside-toplevel
-        from model import Model
-
-        umodel = Model()
         timer = Timer()
         timer.set(args.pred_time_budget)
         LOGGER.info("==== start predicting")
@@ -100,7 +96,11 @@ def main():
     """main entry"""
     LOGGER.info("==== prediction process started")
     args = _parse_args()
-    result = predict(args)
+    # pylint: disable-next=import-error,import-outside-toplevel
+    from model import Model
+
+    umodel = Model()
+    result = predict(args, umodel)
     LOGGER.info("==== Write result")
     _write_result(args, result)
 

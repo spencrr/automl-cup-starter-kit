@@ -159,7 +159,7 @@ def _train(args, umodel, dataset: AutoMLCupDataset):
     return result
 
 
-def _predict(args):
+def _predict(args, model):
     # Make predictions using the trained model
     LOGGER.info("===== call prediction")
 
@@ -172,7 +172,7 @@ def _predict(args):
             "pred_time_budget": args.pred_time_budget,
         }
     )
-    result = predict(predict_args)
+    result = predict(predict_args, model)
     return result
 
 
@@ -243,7 +243,7 @@ def main():
         return
 
     LOGGER.info("===== Begin preding by user model on test set")
-    pred_result = _predict(args)
+    pred_result = _predict(args, umodel)
 
     _finalize(args, train_result, pred_result)
 
