@@ -16,19 +16,30 @@ class Model:
         """Train the model.
 
         Args:
-            X: Training data matrix of shape (num-samples, num-features), type np.ndarray.
-            y: Training label vector of shape (num-samples), type np.ndarray.
+            train_dataset: Training data, type datasets.Dataset.
         """
         print(f"FROM MODEL.PY: TRAIN {train_dataset}")
-        # print(f"X has shape {X.shape} and is:\n{X}")
-        # print(f"y has shape {y.shape} and is:\n{y}")
+
+        try:
+            X = np.array(train_dataset["input"])
+        except ValueError:
+            max_len = max(map(len, train_dataset["input"]))
+            X = np.zeros((len(train_dataset), max_len), dtype=np.float32)
+            for idx, row in enumerate(train_dataset["input"]):
+                X[idx, : len(row)] = row
+
+        y = np.array(train_dataset["label"])
+
+        print(f"FROM MODEL.PY: X SHAPE {X.shape}")
+        print(f"FROM MODEL.PY: Y SHAPE {y.shape}")
+
         # self.classifier.fit(X, y)
 
     def predict(self, dataset: Dataset):
         """Predict labels.
 
         Args:
-          X: Data matrix of shape (num-samples, num-features) to pass to the model for inference, type np.ndarray.
+            test_dataset: Testing data, type datasets.Dataset.
         """
         print(f"FROM MODEL.PY: TEST {dataset}")
         # y = self.classifier.predict(X)
