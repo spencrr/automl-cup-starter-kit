@@ -56,8 +56,8 @@ leaderboards:
       - title: Accuracy
         key: accuracy
         index: 0
-        sorting: asc
+        sorting: desc
       - title: Duration
         key: duration
         index: 1
-        sorting: desc
+        sorting: asc
