@@ -4,8 +4,9 @@ import json
 import os
 from os.path import join
 from sys import path
+from time import time
 
-from common import TimeoutException, Timer, get_logger
+from common import get_logger
 from dataset import AutoMLCupDataset
 from pandas import Series
 
@@ -28,20 +29,15 @@ def predict(args, umodel):
         path.append(args.model_dir)
         LOGGER.info("==== Load user model")
 
-        timer = Timer()
-        timer.set(args.pred_time_budget)
         LOGGER.info("==== start predicting")
-        with timer.time_limit("predicting"):
-            y_pred = umodel.predict(dataset.get_split("test").remove_columns("label"))
-        duration = timer.duration
+        start = time()
+        y_pred = umodel.predict(dataset.get_split("test").remove_columns("label"))
+        duration = time() - start
         LOGGER.info(f"Finished predicting the model. time spent {duration:5.2} sec")
         # Write predictions to output_dir
         _write_predict(args.output_dir, Series(y_pred))
         result["status"] = "success"
         result["duration"] = duration
-    except TimeoutException as ex:
-        LOGGER.error(ex, exc_info=True)
-        result["status"] = "timeout"
     except Exception as ex:
         LOGGER.error(ex, exc_info=True)
         result["status"] = "failed"

@@ -55,8 +55,7 @@ def _parse_args():
     default_code_dir = root_dir / "code_submission"
     default_score_dir = root_dir / "scoring_output"
     default_temp_dir = root_dir / "temp_output"
-    default_time_budget = 1200
-    default_pred_time_budget = 600
+    default_time_budget = 18000
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--dataset_dir",
@@ -109,12 +108,6 @@ def _parse_args():
         help="Time budget for trainning model if not specified" " in meta.json.",
     )
     parser.add_argument(
-        "--pred_time_budget",
-        type=float,
-        default=default_pred_time_budget,
-        help="Time budget for predicting model " "if not specified in meta.json.",
-    )
-    parser.add_argument(
         "--no-predict",
         dest="predict",
         default=True,
@@ -147,11 +140,9 @@ def _check_umodel_methed(umodel):
 
 def _train(args, umodel, dataset: AutoMLCupDataset):
     # Train the model
-    timer = Timer()
-    timer.set(args.time_budget)
-    with timer.time_limit("training"):
-        umodel.train(dataset.get_split("train"))
-    duration = timer.duration
+    start = time.time()
+    umodel.train(dataset.get_split("train"))
+    duration = time.time() - start
     LOGGER.info(f"Finished training the model. time spent {duration:5.2} sec")
 
     result = {}
@@ -169,7 +160,6 @@ def _predict(args, model):
             "model_dir": args.code_dir,
             "output_dir": args.output_dir,
             "temp_dir": args.temp_dir,
-            "pred_time_budget": args.pred_time_budget,
         }
     )
     result = predict(predict_args, model)
@@ -235,15 +225,18 @@ def main():
     LOGGER.info("===== Check user model methods")
     _check_umodel_methed(umodel)
 
-    LOGGER.info("===== Begin training user model")
-    train_result = _train(args, umodel, dataset)
+    timer = Timer()
+    timer.set(args.time_budget)
+    with timer.time_limit("train+predict"):
+        LOGGER.info("===== Begin training user model")
+        train_result = _train(args, umodel, dataset)
 
-    if not args.predict:
-        LOGGER.info("===== Skipping prediction")
-        return
+        if not args.predict:
+            LOGGER.info("===== Skipping prediction")
+            return
 
-    LOGGER.info("===== Begin preding by user model on test set")
-    pred_result = _predict(args, umodel)
+        LOGGER.info("===== Begin preding by user model on test set")
+        pred_result = _predict(args, umodel)
 
     _finalize(args, train_result, pred_result)
 
