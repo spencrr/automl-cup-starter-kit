@@ -1,0 +1,12 @@
+{
+    "name": "lego",
+    "input_dimension": 1,
+    "num_examples": 2000000,
+    "max_sequence_len": 52,
+    "channels": 1,
+    "width": 1,
+    "height": 1,
+    "output_shape": [10],
+    "output_type": "classification",
+    "evaluation_metric": "bce"
+}
