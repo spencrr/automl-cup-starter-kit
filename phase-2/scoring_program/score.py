@@ -55,10 +55,10 @@ def score(
         return accuracy_score(y_test, y_pred)
     if evaluation_metric is EvaluationMetric.BCE:
         return binary_cross_entropy(
-            Tensor(y_test), Tensor(y_pred), reduction="sum"
+            Tensor(y_test), Tensor(y_pred), reduction="mean"
         ).item()
     if evaluation_metric is EvaluationMetric.MAE:
-        return l1_loss(Tensor(y_test), Tensor(y_pred), reduction="sum").item()
+        return l1_loss(Tensor(y_test), Tensor(y_pred), reduction="mean").item()
     raise ValueError(f"EvaluationMetric '{evaluation_metric}' is invalid.")
 
 
