@@ -35,6 +35,14 @@ tasks:
     reference_data: data/protein/
     scoring_program: scoring_program
     ingestion_program: ingestion_program
+  - index: 2
+    name: Splice
+    description: TODO
+    is_public: false
+    input_data: data/splice/
+    reference_data: data/splice/
+    scoring_program: scoring_program
+    ingestion_program: ingestion_program
 
 phases:
   - index: 0
@@ -45,6 +53,7 @@ phases:
     tasks:
       - 0
       - 1
+      - 2
 
 # Leaderboard
 leaderboards:
