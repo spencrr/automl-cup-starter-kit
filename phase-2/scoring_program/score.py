@@ -88,7 +88,7 @@ def main():
 
     LOGGER.info("===== Getting runtime duration.")
     duration = get_duration(args["prediction_dir"] / "end.txt")
-    LOGGER.info(f"===== Gotruntime duration of '{duration}'.")
+    LOGGER.info(f"===== Got runtime duration of '{duration}'.")
 
     scores = {
         "score": score_value,
