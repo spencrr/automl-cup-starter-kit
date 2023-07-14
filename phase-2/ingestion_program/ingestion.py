@@ -236,6 +236,11 @@ def main():
         LOGGER.info("===== Begin training user model")
         try:
             train_result = _train(args, umodel, dataset)
+        except SystemExit as ex:
+            LOGGER.exception(
+                "Encountered system exit exception during training %s", str(ex)
+            )
+            raise ex
         except Exception as ex:
             LOGGER.exception("Encountered exception during training %s", str(ex))
             raise ex
@@ -246,6 +251,11 @@ def main():
         try:
             LOGGER.info("===== Begin preding by user model on test set")
             pred_result = _predict(args, umodel)
+        except SystemExit as ex:
+            LOGGER.exception(
+                "Encountered system exit exception during training %s", str(ex)
+            )
+            raise ex
         except Exception as ex:
             LOGGER.exception("Encountered exception during prediction %s", str(ex))
             raise ex
