@@ -234,7 +234,11 @@ def main():
     timer.set(args.time_budget)
     with timer.time_limit("train+predict"):
         LOGGER.info("===== Begin training user model")
-        train_result = _train(args, umodel, dataset)
+        try:
+            train_result = _train(args, umodel, dataset)
+        except Exception as ex:
+            LOGGER.exception("Encountered exception during training %s", str(ex))
+            raise ex
 
         if not args.predict:
             LOGGER.info("===== Skipping prediction")
