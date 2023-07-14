@@ -243,9 +243,12 @@ def main():
         if not args.predict:
             LOGGER.info("===== Skipping prediction")
             return
-
-        LOGGER.info("===== Begin preding by user model on test set")
-        pred_result = _predict(args, umodel)
+        try:
+            LOGGER.info("===== Begin preding by user model on test set")
+            pred_result = _predict(args, umodel)
+        except Exception as ex:
+            LOGGER.exception("Encountered exception during prediction %s", str(ex))
+            raise ex
 
     _finalize(args, train_result, pred_result)
 
