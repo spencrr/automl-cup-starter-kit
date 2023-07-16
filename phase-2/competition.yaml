@@ -21,7 +21,7 @@ pages:
 tasks:
   - index: 0
     name: Lego
-    description: TODO 
+    description: A 1D synthetic reasoning task
     is_public: false
     input_data: data/lego/
     reference_data: data/lego/
@@ -29,7 +29,7 @@ tasks:
     ingestion_program: ingestion_program
   - index: 1
     name: Protein
-    description: TODO
+    description: A 2D Protein Folding task
     is_public: false
     input_data: data/protein/
     reference_data: data/protein/
@@ -37,7 +37,7 @@ tasks:
     ingestion_program: ingestion_program
   - index: 2
     name: Splice
-    description: TODO
+    description: Splice-junction Gene Sequences
     is_public: false
     input_data: data/splice/
     reference_data: data/splice/
@@ -62,8 +62,8 @@ leaderboards:
     key: Results
     submission_rule: "Add_And_Delete"
     columns:
-      - title: Score
-        key: score
+      - title: Error
+        key: error
         index: 0
         sorting: desc
       - title: Duration
