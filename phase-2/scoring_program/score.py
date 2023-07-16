@@ -46,13 +46,13 @@ def get_duration(prediction_metadata_file):
         return metadata["ingestion_duration"]
 
 
-def score(
+def calculate_error(
     y_test: ArrayLike, y_pred: ArrayLike, evaluation_metric: EvaluationMetric
 ) -> float:
     LOGGER.info(f"===== Scoring with '{evaluation_metric.value}'.")
 
     if evaluation_metric is EvaluationMetric.ACCURACY:
-        return accuracy_score(y_test, y_pred)
+        return 1 - accuracy_score(y_test, y_pred)
     if evaluation_metric is EvaluationMetric.BCE:
         return binary_cross_entropy(
             Tensor(y_test), Tensor(y_pred), reduction="mean"
@@ -83,15 +83,15 @@ def main():
     y_pred = np.load(prediction_file)["prediction"]
 
     LOGGER.info("===== Getting scores.")
-    score_value = score(y_test, y_pred, dataset.metadata().evaluation_metric)
-    LOGGER.info(f"===== Got score value of '{score_value}'.")
+    error_value = calculate_error(y_test, y_pred, dataset.metadata().evaluation_metric)
+    LOGGER.info(f"===== Got error value of '{error_value}'.")
 
     LOGGER.info("===== Getting runtime duration.")
     duration = get_duration(args["prediction_dir"] / "end.txt")
     LOGGER.info(f"===== Got runtime duration of '{duration}'.")
 
     scores = {
-        "score": score_value,
+        "error": error_value,
         "duration": duration,
     }
     LOGGER.info(f"===== Writing scores to '{score_file}'.")
