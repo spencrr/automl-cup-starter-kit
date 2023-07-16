@@ -8,5 +8,6 @@
     "height": 1,
     "output_shape": [10],
     "output_type": "classification",
-    "evaluation_metric": "bce"
+    "evaluation_metric": "bce",
+    "training_limit_sec": 54000
 }

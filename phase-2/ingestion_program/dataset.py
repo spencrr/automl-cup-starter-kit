@@ -43,6 +43,7 @@ class AutoMLCupDataset:
                 dataset_info["output_shape"],
                 OutputType(dataset_info["output_type"]),
                 EvaluationMetric(dataset_info["evaluation_metric"]),
+                dataset_info["training_limit_sec"],
             )
 
         for dataloader in AutoMLCupDataset.dataloaders:

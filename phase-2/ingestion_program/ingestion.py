@@ -231,7 +231,9 @@ def main():
     _check_umodel_methed(umodel)
 
     timer = Timer()
-    timer.set(args.time_budget)
+    time_limit = dataset.metadata().training_limit_sec
+    LOGGER.info(f"===== Setting time limit to {time_limit}")
+    timer.set(time_limit)
     with timer.time_limit("train+predict"):
         LOGGER.info("===== Begin training user model")
         try:

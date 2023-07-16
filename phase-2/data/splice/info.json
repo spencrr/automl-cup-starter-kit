@@ -8,5 +8,6 @@
     "height": 1,
     "output_shape": [3],
     "output_type": "classification",
-    "evaluation_metric": "accuracy"
+    "evaluation_metric": "accuracy",
+    "training_limit_sec": 18000
 }

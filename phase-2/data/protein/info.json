@@ -8,5 +8,6 @@
     "height": 128,
     "output_shape": [128, 128],
     "output_type": "regression",
-    "evaluation_metric": "mae"
+    "evaluation_metric": "mae",
+    "training_limit_sec": 36000
 }

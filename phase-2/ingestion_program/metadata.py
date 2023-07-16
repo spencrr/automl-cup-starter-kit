@@ -43,3 +43,4 @@ class AutoMLCupMetadata:
     output_shape: OutputShape
     output_type: OutputType
     evaluation_metric: EvaluationMetric
+    training_limit_sec: int
