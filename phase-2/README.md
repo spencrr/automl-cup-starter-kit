@@ -64,7 +64,7 @@ For both tasks, the data are formatted as a `Dict[str, ArrayLike]` with the foll
 
 ### Setup
 
-**TODO**
+You can download the datasets [here](https://drive.google.com/file/d/1pbAj9KdaBye6gOeEhfoj5fw2BY3PALC9/view?usp=sharing) and place them in `phase-2/data/`.
 
 ## Reference
 
