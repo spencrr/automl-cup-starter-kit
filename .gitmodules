@@ -1,0 +1,3 @@
+[submodule "phase-3"]
+	path = phase-3
+	url = git@github.com:spencrr/automl-cup-starter-kit-phase-3
