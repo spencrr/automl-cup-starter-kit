@@ -60,7 +60,16 @@ For both tasks, the data are formatted as a `Dict[str, ArrayLike]` with the foll
 
 ### Metadata
 
-**TODO**
+We now supply the following properties via a metadata object during `Model.__init__()`.
+
+```py
+input_dimension: int
+input_shape: InputShape
+output_shape: OutputShape
+output_type: OutputType
+evaluation_metric: EvaluationMetric
+training_limit_sec: int
+```
 
 ### Setup
 
